@@ -33,14 +33,14 @@ public class TestListener implements ITestListener {
 
 	public void onTestSuccess(ITestResult result) {
 		logger.info(result.getMethod().getMethodName() + " " + "PASSED");
-		ExtentReporterUtility.getText().log(Status.PASS, result.getMethod().getMethodName() + " " + "PASSED");
+		ExtentReporterUtility.getTest().log(Status.PASS, result.getMethod().getMethodName() + " " + "PASSED");
 	}
 
 	public void onTestFailure(ITestResult result) {
 		logger.error(result.getMethod().getMethodName() + " " + "FAILED");
 		logger.error(result.getThrowable().getMessage());
-		ExtentReporterUtility.getText().log(Status.FAIL, result.getMethod().getMethodName() + " " + "FAILED");
-		ExtentReporterUtility.getText().log(Status.FAIL, result.getThrowable().getMessage());
+		ExtentReporterUtility.getTest().log(Status.FAIL, result.getMethod().getMethodName() + " " + "FAILED");
+		ExtentReporterUtility.getTest().log(Status.FAIL, result.getThrowable().getMessage());
 		
 		Object testClass=result.getInstance();
 		
@@ -50,13 +50,13 @@ public class TestListener implements ITestListener {
 		String screenshotPath=browserUtility.takeScreenShot(result.getMethod().getMethodName());
 		logger.info("Attaching the screenshot to the HTML File");
 		
-		ExtentReporterUtility.getText().addScreenCaptureFromPath(screenshotPath);
+		ExtentReporterUtility.getTest().addScreenCaptureFromPath(screenshotPath);
 		
 	}
 
 	public void onTestSkipped(ITestResult result) {
 		logger.warn(result.getMethod().getMethodName() + " " + "SKIPPED");
-		ExtentReporterUtility.getText().log(Status.SKIP, result.getMethod().getMethodName() + " " + "SKIPPED");
+		ExtentReporterUtility.getTest().log(Status.SKIP, result.getMethod().getMethodName() + " " + "SKIPPED");
 	}
 
 	public void onStart(ITestContext context) {

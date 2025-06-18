@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
@@ -14,6 +15,7 @@ import com.utility.BrowserUtility;
 import com.utility.LambdaTestUtility;
 import com.utility.LoggerUtility;
 
+@Listeners(com.ui.listeners.TestListener.class)
 public class TestBase {
 	protected HomePage homePage;
 	Logger logger=LoggerUtility.getLogger(this.getClass());

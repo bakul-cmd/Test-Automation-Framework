@@ -9,7 +9,7 @@ public class ExtentReporterUtility {
 	private static ThreadLocal<ExtentTest> extentTest=new ThreadLocal<ExtentTest>();
 	
 	public static void setupSparkReporter(String reportName) {
-		ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir")+ reportName);
+		ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir")+"/Extent-Report/"+reportName);
 		extentReports = new ExtentReports();
 		extentReports.attachReporter(extentSparkReporter);
 	}
@@ -19,7 +19,7 @@ public class ExtentReporterUtility {
 		extentTest.set(test);
 	}
 	
-	public static ExtentTest getText() {
+	public static ExtentTest getTest() {
 		return extentTest.get();
 	}
 	
