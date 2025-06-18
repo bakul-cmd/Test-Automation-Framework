@@ -11,21 +11,25 @@ import com.ui.pojo.Environment;
 
 public class JSONUtility {
 
-	public static Environment readJSON(Env env){
-		Gson gson=new Gson();
-		File jsonFile=new File(System.getProperty("user.dir") + "\\config\\config.json");
-		FileReader fileReader = null;
-		try {
-			fileReader = new FileReader(jsonFile);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Config config=gson.fromJson(fileReader, Config.class);
-		Environment environment=config.getEnvironments().get("QA");
-		
-		return environment;
-
+	public static Environment readJSON(Env env) {
+	    Gson gson = new Gson();
+	    File jsonFile = new File(System.getProperty("user.dir") + "/config/config.json"); // Use '/' for cross-platform compatibility
+	    FileReader fileReader = null;
+	    try {
+	        fileReader = new FileReader(jsonFile);
+	    } catch (FileNotFoundException e) {
+	        throw new RuntimeException("Configuration file not found at: " + jsonFile.getAbsolutePath(), e); // Replace with meaningful error handling
+	    }
+	    Config config = gson.fromJson(fileReader, Config.class);
+	    if (config == null || config.getEnvironments() == null) {
+	        throw new RuntimeException("Invalid configuration data in file: " + jsonFile.getAbsolutePath());
+	    }
+	    Environment environment = config.getEnvironments().get(env.name());
+	    if (environment == null) {
+	        throw new RuntimeException("Environment " + env.name() + " not found in configuration file.");
+	    }
+	    return environment;
 	}
 
 }
+
