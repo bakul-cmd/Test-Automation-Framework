@@ -13,7 +13,6 @@ public final class MyAccountPage extends BrowserUtility {
 	
 	public MyAccountPage(WebDriver driver) {
 		super(driver);
-		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	
 	}
 	

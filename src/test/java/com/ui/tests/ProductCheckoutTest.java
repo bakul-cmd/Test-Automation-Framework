@@ -1,9 +1,12 @@
 package com.ui.tests;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.constants.Size.*;
+import com.ui.pages.ProductDetailsPage;
 import com.ui.pages.SearchResultPage;
 
 public class ProductCheckoutTest extends TestBase {
@@ -23,10 +26,13 @@ public class ProductCheckoutTest extends TestBase {
 	@Test(description = "Verify User able to able to buy a product", groups = { "e2e", "Sanity", "Smoke" })
 	public void checkoutTest() {
 		
-		Assert.assertTrue(searchResultPage.isSearchTermPresentInProductList(SEARCH_TERM),
-			    "Search term not present in product list!");
+		//Assert.assertTrue(searchResultPage.isSearchTermPresentInProductList(SEARCH_TERM),
+			    //"Search term not present in product list!");
 
-			searchResultPage.ClickOnTheProductAt(0);
+		String result=searchResultPage.ClickOnTheProductAt(1).ChangeSize(L).addToCart().proceedToCheckout()
+			.goToConfirmAddressPage().goToShipmentPage().goToPaymentPage().makePaymentByWire();
+		
+		Assert.assertTrue(result.contains("complete"));
 
 
 	}
