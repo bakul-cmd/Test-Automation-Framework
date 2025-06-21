@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.utility.BrowserUtility;
 
@@ -30,5 +31,22 @@ public class SearchResultPage extends BrowserUtility {
 		
 		return result;
 	}
+	
+	public void ClickOnTheProductAt(int index) {
+	    List<WebElement> products = getAllElements(ALL_PRODUCT_LIST_NAME_LOCATOR);
+
+	    if (products.isEmpty()) {
+	        throw new RuntimeException("No products found in the search results.");
+	    }
+
+	    if (index >= products.size()) {
+	        throw new IndexOutOfBoundsException("Requested index " + index + " but only " + products.size() + " products are available.");
+	    }
+
+	    clickOn(products.get(index));
+	}
+
+
+	
 
 }

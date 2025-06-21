@@ -3,6 +3,7 @@ package com.utility;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +22,9 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.constants.Browser;
 
@@ -126,58 +129,80 @@ public abstract class BrowserUtility {
 		element.click();
 		logger.info("Clicked on element with locator: " + locator.toString());
 	}
+	
+	public void clickOn(WebElement element) {
+		
+		element.click();
+		logger.info("Click on Element direct method is revoked.");
+	}
 
 	public void enterText(By locator, String textToEnter) {
 		WebElement element = driver.get().findElement(locator);
 		element.sendKeys(textToEnter);
 		logger.info("Entered text into element with locator" + locator.toString());
 	}
-	
+
 	public void clearText(By textBoxLocator) {
 		WebElement element = driver.get().findElement(textBoxLocator);
 
 		logger.info("Element found and cleared the text from textbox");
-		
+
 		element.clear();
 	}
-	
+
 	public void selectFromDropdown(By dropDownLocator, String optionToSelect) {
-		logger.info("Finding element with the locator"+dropDownLocator);
-		WebElement element=driver.get().findElement(dropDownLocator);
-		Select select=new Select(element);
+		logger.info("Finding element with the locator" + dropDownLocator);
+		WebElement element = driver.get().findElement(dropDownLocator);
+		Select select = new Select(element);
 		select.selectByVisibleText(optionToSelect);
 	}
+
 	public void enterSpecialKey(By locator, Keys keyToEnter) {
 		WebElement element = driver.get().findElement(locator);
 		element.sendKeys(keyToEnter);
-		logger.info(keyToEnter+" key entered into element with locator" + locator.toString());
+		logger.info(keyToEnter + " key entered into element with locator" + locator.toString());
 	}
 
 	public String getVisibleText(By locator) {
-		
-		logger.info("Finding the element by locator"+locator);
+
+		logger.info("Finding the element by locator" + locator);
 		WebElement element = driver.get().findElement(locator);
-		
-		logger.info("Returning the visible text of the element"+element.toString());
+
+		logger.info("Returning the visible text of the element" + element.toString());
 		return element.getText();
 	}
+
 	public String getVisibleText(WebElement element) {
-		
-		logger.info("Returning the visible text of the element"+element.toString());
+
+		logger.info("Returning the visible text of the element" + element.toString());
 		return element.getText();
 	}
-	
+
 	public List<String> getAllVisibleText(By locator) {
-		
-		logger.info("Getting list of elements by locator"+locator);
+
+		logger.info("Getting list of elements by locator" + locator);
 		List<WebElement> elementList = driver.get().findElements(locator);
-		
-		List<String> visibleTextList=new ArrayList<String>();
-		for( WebElement element: elementList) {
+
+		List<String> visibleTextList = new ArrayList<String>();
+		for (WebElement element : elementList) {
 			System.out.println(element.getText());
 			visibleTextList.add(getVisibleText(element));
 		}
 		return visibleTextList;
+	}
+
+//	public List<WebElement> getAllElements(By locator) {
+//
+//		WebDriverWait wait=new WebDriverWait(driver.get(),Duration.ofSeconds(10));
+//		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+//		logger.info("Getting list of elements by locator" + locator);
+//		return driver.get().findElements(locator);
+//		
+//	}
+	public List<WebElement> getAllElements(By locator) {
+	    WebDriverWait wait = new WebDriverWait(driver.get(), Duration.ofSeconds(10));
+	    wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+	    return driver.get().findElements(locator);
 	}
 
 	public void quit() {
