@@ -243,7 +243,7 @@ public abstract class BrowserUtility {
 		TakesScreenshot screenshot = (TakesScreenshot) driver.get();
 		File screenshotData = screenshot.getScreenshotAs(OutputType.FILE);
 		Date date = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("HH-mm-ss");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
 		String timeStamp = format.format(date);
 		String path = "./screenshot/" + name + " - " + timeStamp + ".png";
 		File screenshotFile = new File(path);

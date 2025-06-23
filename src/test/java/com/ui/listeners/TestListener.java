@@ -29,11 +29,19 @@ public class TestListener implements ITestListener {
 		logger.info(Arrays.toString(result.getMethod().getGroups()));
 
 		ExtentReporterUtility.createExtentTest(result.getMethod().getMethodName());
+		
 	}
 
 	public void onTestSuccess(ITestResult result) {
 		logger.info(result.getMethod().getMethodName() + " " + "PASSED");
 		ExtentReporterUtility.getTest().log(Status.PASS, result.getMethod().getMethodName() + " " + "PASSED");
+		
+		Object testClass=result.getInstance();
+		BrowserUtility browserUtility=((TestBase)testClass).getInstance();
+		logger.info("Taking screenshot for passed test..");
+		String screenshotPath=browserUtility.takeScreenShot(result.getMethod().getMethodName()+ "_Pass");
+		logger.info("Attaching the screenshot to the HTML file");
+		ExtentReporterUtility.getTest().addVideoFromPath(screenshotPath);
 	}
 
 	public void onTestFailure(ITestResult result) {
@@ -47,7 +55,7 @@ public class TestListener implements ITestListener {
 		BrowserUtility browserUtility=((TestBase)testClass).getInstance();
 		logger.info("Taking screenshot for failed test..");
 		
-		String screenshotPath=browserUtility.takeScreenShot(result.getMethod().getMethodName());
+		String screenshotPath=browserUtility.takeScreenShot(result.getMethod().getMethodName()+"_Fail");
 		logger.info("Attaching the screenshot to the HTML File");
 		
 		ExtentReporterUtility.getTest().addScreenCaptureFromPath(screenshotPath);
@@ -57,6 +65,15 @@ public class TestListener implements ITestListener {
 	public void onTestSkipped(ITestResult result) {
 		logger.warn(result.getMethod().getMethodName() + " " + "SKIPPED");
 		ExtentReporterUtility.getTest().log(Status.SKIP, result.getMethod().getMethodName() + " " + "SKIPPED");
+		
+		Object testClass=result.getInstance();
+		
+		BrowserUtility browserUtility=((TestBase)testClass).getInstance();
+		
+		logger.info("Taking screenshot for skipped test..");
+		String screenshotPath=browserUtility.takeScreenShot(result.getMethod().getMethodName()+"_Skip");
+		logger.info("Attaching the screenshot to the HTML File");
+		ExtentReporterUtility.getTest().addScreenCaptureFromPath(screenshotPath);
 	}
 
 	public void onStart(ITestContext context) {
