@@ -20,7 +20,7 @@ public class DeleteAddressTest extends TestBase {
 	}
 	
 	
-	@Test(description="It verifies to delete exsisting record")
+	@Test(description="It verifies to delete exsisting record", dependsOnGroups="coreFlow")
 	public void deleteAddressTest() {
 		
 		String result=myAccountPage.goToMyAddressesPage().clickOnDeleteButton().confirmDelete().addAddressAgainVisibility();

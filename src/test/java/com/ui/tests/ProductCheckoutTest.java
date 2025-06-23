@@ -23,7 +23,7 @@ public class ProductCheckoutTest extends TestBase {
 
 	}
 
-	@Test(description = "Verify User able to able to buy a product", groups = { "e2e", "Sanity", "Smoke" },
+	@Test(description = "Verify User able to able to buy a product", groups = {"coreFlow"},
 			retryAnalyzer=com.ui.listeners.MyRetryAnalyzer.class)
 	public void checkoutTest() {
 		

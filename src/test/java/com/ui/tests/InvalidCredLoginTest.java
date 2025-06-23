@@ -26,7 +26,7 @@ public class InvalidCredLoginTest extends TestBase {
 	
 	
 	
-	@Test(enabled=true,description="Verifies with the Invalid user to get proper error message" , groups = {"e2e","sanity"})
+	@Test(enabled=true,description="Verifies with the Invalid user to get proper error message" , groups = {"coreFlow"})
 	public void loginTest(){
 		
 		assertEquals(homePage.goToLoginPage().doLoginWithInvalidCredentials(INVALID_EMAIL, INVALID_PASSWORD).

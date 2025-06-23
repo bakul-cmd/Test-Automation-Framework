@@ -20,7 +20,7 @@ public class SearchProductTest extends TestBase{
 	
 	
 	@Test(description="Verify if the logged in user is able to search for a product and correct products are displayed",
-			groups= {"e2e","Sanity"})
+			groups = {"coreFlow"})
 	public void verifyProductSearchTest() {
 		
 		boolean actualResult=myAccountPage.searchForProduct(SEARCH_TERM).isSearchTermPresentInProductList(SEARCH_TERM);
