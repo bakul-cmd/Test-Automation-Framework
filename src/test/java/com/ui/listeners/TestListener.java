@@ -41,7 +41,7 @@ public class TestListener implements ITestListener {
 		logger.info("Taking screenshot for passed test..");
 		String screenshotPath=browserUtility.takeScreenShot(result.getMethod().getMethodName()+ "_Pass");
 		logger.info("Attaching the screenshot to the HTML file");
-		ExtentReporterUtility.getTest().addVideoFromPath(screenshotPath);
+		ExtentReporterUtility.getTest().addScreenCaptureFromPath(screenshotPath);
 	}
 
 	public void onTestFailure(ITestResult result) {
