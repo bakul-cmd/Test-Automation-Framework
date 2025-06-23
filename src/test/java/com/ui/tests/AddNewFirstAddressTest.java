@@ -20,7 +20,7 @@ public class AddNewFirstAddressTest extends TestBase {
 	}
 	
 	
-	@Test
+	@Test(retryAnalyzer=com.ui.listeners.MyRetryAnalyzer.class)
 	public void addNewAddress() {
 		String newAddress =myAccountPage.goToAddAddressPage().saveAddress(address);
 		Assert.assertEquals(newAddress,address.getAddressAlias().toUpperCase());
