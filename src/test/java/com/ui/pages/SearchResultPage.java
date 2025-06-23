@@ -11,8 +11,8 @@ import com.utility.BrowserUtility;
 
 public class SearchResultPage extends BrowserUtility {
 	
-	private static final By PRODUCT_LISTING_TITLE_LOCATOR=By.xpath("//span[@class=\"lighter\"]");
-	private static final By ALL_PRODUCT_LIST_NAME_LOCATOR=By.xpath("//h5[@itemprop=\"name\"]/a");
+	private static final By PRODUCT_LISTING_TITLE_LOCATOR=By.xpath("//span[@class='lighter']");
+	private static final By ALL_PRODUCT_LIST_NAME_LOCATOR=By.xpath("//h5[@itemprop='name']/a");
 
 	public SearchResultPage(WebDriver driver) {
 		super(driver);

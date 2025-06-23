@@ -23,7 +23,8 @@ public class ProductCheckoutTest extends TestBase {
 
 	}
 
-	@Test(description = "Verify User able to able to buy a product", groups = { "e2e", "Sanity", "Smoke" })
+	@Test(description = "Verify User able to able to buy a product", groups = { "e2e", "Sanity", "Smoke" },
+			retryAnalyzer=com.ui.listeners.MyRetryAnalyzer.class)
 	public void checkoutTest() {
 		
 		//Assert.assertTrue(searchResultPage.isSearchTermPresentInProductList(SEARCH_TERM),

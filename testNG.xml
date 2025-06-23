@@ -1,8 +1,10 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Ecom Test Suite" parallel="methods" thread-counts="6"
-	verbose="1">
-	<test name="Login Test from diff file source">
+<suite name="Ecom Test Suite" parallel="methods" thread-count="6"
+	verbose="2">
+
+	<!-- ✅ First test block: All classes except DeleteAddressTest -->
+	<test name="All Tests Except Delete">
 		<parameter name="browser" value="${browser}" />
 		<parameter name="isLambdaTest" value="${isLambdaTest}" />
 		<parameter name="isHeadless" value="${isHeadless}" />
@@ -14,4 +16,15 @@
 			<class name="com.ui.tests.ProductCheckoutTest" />
 		</classes>
 	</test>
+
+	<!-- ✅ Second test block: DeleteAddressTest runs after others -->
+	<test name="Run DeleteAddressTest Last">
+		<parameter name="browser" value="${browser}" />
+		<parameter name="isLambdaTest" value="${isLambdaTest}" />
+		<parameter name="isHeadless" value="${isHeadless}" />
+		<classes>
+			<class name="com.ui.tests.DeleteAddressTest" />
+		</classes>
+	</test>
+
 </suite>

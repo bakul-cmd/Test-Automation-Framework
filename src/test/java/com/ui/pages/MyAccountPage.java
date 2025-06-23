@@ -10,6 +10,7 @@ public final class MyAccountPage extends BrowserUtility {
 	private static final By USER_NAME_LOCATOR=By.xpath("//a[@title=\"View my customer account\"]/span");
 	private static final By SEARCH_TEXT_BOX_LOCATOR=By.id("search_query_top");
 	private static final By ADD_NEW_ADDRESS_LINK_LOCATOR=By.xpath("//a[@title=\"Add my first address\"]");
+	private static final By MY_ADDRESSES_MENU_LOCATOR=By.xpath("//a[@title='Addresses']/span");
 	
 	public MyAccountPage(WebDriver driver) {
 		super(driver);
@@ -32,6 +33,11 @@ public final class MyAccountPage extends BrowserUtility {
 		clickOn(ADD_NEW_ADDRESS_LINK_LOCATOR);
 		
 		return new AddressPage(getDriver());
+	}
+	
+	public MyAddressesPage goToMyAddressesPage() {
+		clickOn(MY_ADDRESSES_MENU_LOCATOR);
+		return new MyAddressesPage(getDriver());
 	}
 
 }

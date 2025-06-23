@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
@@ -203,7 +204,9 @@ public abstract class BrowserUtility {
 	public List<String> getAllVisibleText(By locator) {
 
 		logger.info("Getting list of elements by locator" + locator);
-		List<WebElement> elementList = driver.get().findElements(locator);
+		//List<WebElement> elementList = driver.get().findElements(locator);
+		List<WebElement> elementList=
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
 
 		List<String> visibleTextList = new ArrayList<String>();
 		for (WebElement element : elementList) {
@@ -213,17 +216,23 @@ public abstract class BrowserUtility {
 		return visibleTextList;
 	}
 
-//	public List<WebElement> getAllElements(By locator) {
-//
-//		WebDriverWait wait=new WebDriverWait(driver.get(),Duration.ofSeconds(10));
-//		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
-//		logger.info("Getting list of elements by locator" + locator);
-//		return driver.get().findElements(locator);
-//		
-//	}
 	public List<WebElement> getAllElements(By locator) {
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
 		return driver.get().findElements(locator);
+	}
+	
+	public void acceptAlert() {
+		
+		Alert alert=driver.get().switchTo().alert();
+		logger.info("Alert Message -"+alert.getText());
+		alert.accept();
+	}
+	
+	public boolean isDisplayed(By locator) {
+		
+		WebElement element=wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		
+		return element.isDisplayed(); 
 	}
 
 	public void quit() {
